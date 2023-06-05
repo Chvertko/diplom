@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { Container } from '@mui/material';
+import  {TicketSearch}  from './components/TicketSearch';
+import { TicketList } from './components/TicketList';
+import { useSelector } from 'react-redux';
+import { selectTickets } from './store/selectors';
+
+
+
+
+
+
 
 function App() {
+  const tickets = useSelector(state => state.ticket.tickets);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth='md' sx={{minHeight:'97vh',minWeight:'100vw',alignItems:'center',justifyContent:'center',display:'flex',}}>
+        <TicketSearch/>
+        <TicketList tickets={tickets}/>
+    </Container>
+
   );
 }
 

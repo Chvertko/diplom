@@ -1,0 +1,11 @@
+export const selectOptions = state => state.options.options
+export const selectOptionName = (state) => state.options.options.name;
+export const selectOptionCode = (state) => state.options.options.code;
+export const selectIsLoading = (state) => state.options.isLoading;
+export const selectValues = state => state.options.values
+export const selectInputFrom = state => state.options.values.from
+export const selectInputTo = state => state.options.values.to
+export const selectDateWhenTo = (state) => state.options.values.whenTo;
+export const selectDateWhenBack = (state) => state.options.values.whenBack;
+export const selectTickets = state => state.ticket.tickets
+export const selectTicketsIsLoading = state => state.ticket.isLoading
