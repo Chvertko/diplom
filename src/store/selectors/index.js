@@ -1,6 +1,8 @@
 export const selectOptions = state => state.options.options
 export const selectOptionName = (state) => state.options.options.name;
 export const selectOptionCode = (state) => state.options.options.code;
+export const selectOptionCurrency = (state) => state.options.currency;
+export const selectOptionDirect = (state) => state.options.direct;
 export const selectIsLoading = (state) => state.options.isLoading;
 export const selectValues = state => state.options.values
 export const selectInputFrom = state => state.options.values.from

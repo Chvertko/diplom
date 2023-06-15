@@ -19,6 +19,8 @@ export const optionsSlice = createSlice({
   initialState: {
     options: [],
     isLoading: false,
+    direct: false,
+    currency:'usd',
     values: {
       from: '',
       to: '',
@@ -30,6 +32,12 @@ export const optionsSlice = createSlice({
   reducers: {
     clearOptions: (state) => {
       state.options = [];
+    },
+    setDirect: (state,action) => {
+      state.direct = action.payload
+    },
+    setCurrency: (state,action) => {
+      state.currency = action.payload
     },
     setValues: (state, action) => {
       const { id, value, type } = action.payload;
@@ -47,21 +55,21 @@ export const optionsSlice = createSlice({
   extraReducers: (builder) => {
     builder
     .addMatcher(
-      (action) => action.type.endsWith("/pending"),
+      (action) => action.type.endsWith("countries/fetchCountries/pending"),
       (state) => {
         state.isLoading = true;
         state.error = null;
       }
     )
     .addMatcher(
-      (action) => action.type.endsWith("/rejected"),
+      (action) => action.type.endsWith("countries/fetchCountries/rejected"),
       (state, action) => {
         state.isLoading = false;
         state.error = action.error.message ?? "Failed to search books";
       }
     )
     .addMatcher(
-      (action) => action.type.endsWith("/fulfilled"),
+      (action) => action.type.endsWith("countries/fetchCountries/fulfilled"),
       (state, action) => {
         state.isLoading = false;
         state.options = action.payload
@@ -70,6 +78,6 @@ export const optionsSlice = createSlice({
 },
 });
 
-export const { clearOptions, setValues, setData } = optionsSlice.actions;
+export const { clearOptions, setValues, setData, setCurrency,setDirect } = optionsSlice.actions;
 
 export default optionsSlice.reducer;
