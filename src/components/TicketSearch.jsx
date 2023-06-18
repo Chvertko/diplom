@@ -16,9 +16,9 @@ export const TicketSearch = () => {
   const dateWhenBack = useSelector(selectDateWhenBack);
   const direct = useSelector(selectOptionDirect);
   const currency = useSelector(selectOptionCurrency);
+  const tickets = useSelector(selectTickets)
   const [isDirect, setIsDirect] = useState(true);
-  const [tickets, setTickets] = useState([]);
-
+  const [disabled, setDisabled] = useState(false)
   const handleSearch = () => {
     const searchParams = {
       from: inputFrom,
@@ -43,7 +43,8 @@ export const TicketSearch = () => {
   };
   useEffect(() => {
     dispatch(fetchTickets({ inputFrom, inputTo, dateWhenTo, dateWhenBack, direct, currency }));
-  }, [currency, dispatch]);
+    tickets.length > 0 ? setDisabled(true) : setDisabled(false)
+  }, [currency, dispatch,tickets]);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -65,7 +66,7 @@ export const TicketSearch = () => {
         <FormControlLabel control={<Checkbox onChange={toggleDirect} />} label="Без пересадок" />
         <FormControlLabel
           control={
-            <Select sx={{ padding: '-10px' }} value={currency} onChange={handleCurrencyChange} variant="outlined">
+            <Select sx={{ padding: '-10px' }} value={currency} onChange={handleCurrencyChange} variant="outlined" disabled={disabled}>
               <MenuItem value="mdl">MDL</MenuItem>
               <MenuItem value="rub">RUB</MenuItem>
               <MenuItem value="usd">USD</MenuItem>

@@ -16,7 +16,7 @@ import QRCode from "qrcode.react";
 import { useSelector } from "react-redux";
 import { selectOptionCurrency } from "../store/selectors";
 
-export const CardTicket = ({ ticket }) => {
+export const CardTicket = ({ ticket, label }) => {
   const currency = useSelector(selectOptionCurrency);
   const [priceInCurrency, setPriceInCurrency] = useState(ticket.price);
 
@@ -109,6 +109,9 @@ export const CardTicket = ({ ticket }) => {
           </Box>
         </Box>
         <Box mt={2}>
+        <Typography variant="h6" component="div" sx={{ fontWeight: "bold", color:'green' }}>
+            {label}
+          </Typography>
           <Typography variant="h6" component="div" sx={{ fontWeight: "bold" }}>
             {`${ticket.origin} - ${ticket.destination}`}
           </Typography>
